@@ -1,12 +1,12 @@
 const { response } = require('express');
 const axios = require('axios');
-const querystring = require('node:querystring');
 require('dotenv').config();
 const { getRandonString } = require('../helpers/randomString');
 
-const CLIENT_ID = process.CLIENT_ID;
-const CLIENT_SECRET = process.CLIENT_SECRET;
-const redirectUri = process.REDIRECT_URI;
+const CLIENT_ID = process.env.CLIENT_ID;
+const CLIENT_SECRET = process.env.CLIENT_SECRET;
+const redirectUri = process.env.REDIRECT_URI;
+const frontEndUri = process.env.FRONTEND_URI;
 
 const stateKey = 'spotify_auth_state';
 
@@ -15,22 +15,14 @@ const login = (req, res = response ) => {
     const scope = 'user-read-private user-read-email';
     //res.cookie(stateKey, state);
 
-    res.redirect('https://accounts.spotify.com/authorize?' +
-        querystring.stringify({
-            response_type: 'code',
-            client_id: CLIENT_ID,
-            scope: scope,
-            redirect_uri: redirectUri,
-            state: state
-        })
-    );
+    res.redirect(`https://accounts.spotify.com/authorize?response_type=code&client_id=${ CLIENT_ID }&scope=${ scope }&redirect_uri=${ redirectUri }&state=${ state }`);
 }
 
 const callback = ( req, res = response ) => {
     const { code, state, error } = req.query;
 
     if ( error ) {
-        res.redirect('/#' + querystring.stringify({ error: 'state_mismatch' }));
+        res.redirect(`/#error=state_mismatch`);
         return;
     }
 
@@ -39,7 +31,7 @@ const callback = ( req, res = response ) => {
         url: 'https://accounts.spotify.com/api/token',
         data : {
             code: code,
-            redirect_uri: 'http://localhost:4200/auth/callback',
+            redirect_uri: frontEndUri,
             grant_type: 'authorization_code'
         },
         headers: {
