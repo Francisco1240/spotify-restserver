@@ -1,6 +1,6 @@
 const { response } = require('express');
 const axios = require('axios');
-const querystring = require('node:querystring');
+const querystring = require('querystring');
 require('dotenv').config();
 const { getRandonString } = require('../helpers/randomString');
 
