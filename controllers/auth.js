@@ -26,8 +26,6 @@ const callback = ( req, res = response ) => {
         return;
     }
 
-    console.log( CLIENT_ID, CLIENT_SECRET, frontEndUri);
-
     axios({
         method: 'post',
         url: 'https://accounts.spotify.com/api/token',
@@ -49,7 +47,6 @@ const callback = ( req, res = response ) => {
         }
     })
     .catch ( ( error ) => {
-        console.log( error );
         res.send( error );
     });
 }
