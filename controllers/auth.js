@@ -8,6 +8,11 @@ const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const redirectUri = process.env.REDIRECT_URI;
 const frontEndUri = process.env.FRONTEND_URI;
 
+// const CLIENT_ID = '0a6ab43cb7c5426ab9182069574572a9';
+// const CLIENT_SECRET = 'b9b65f58880e481aa35c339db3f456a4';
+// const redirectUri = 'http://localhost:4200/auth/callback';
+// const frontEndUri = 'http://localhost:3000';
+
 const stateKey = 'spotify_auth_state';
 
 const login = (req, res = response ) => {
@@ -28,48 +33,31 @@ const callback = ( req, res = response ) => {
 
     console.log( CLIENT_ID, CLIENT_SECRET, frontEndUri )
 
-    axios({
-        method: 'post',
-        url: 'https://accounts.spotify.com/api/token',
-        data : {
-            code: code,
-            redirect_uri: frontEndUri,
-            grant_type: 'authorization_code'
-        },
-        headers: {
-            'content-type': 'application/x-www-form-urlencoded',
-            'Authorization': 'Basic ' + Buffer.from(CLIENT_ID + ':' + CLIENT_SECRET ).toString('base64')
-        }
-    })
-    .then( ( response ) => {
-        if ( response.status === 200 ) {
-            res.send(  response.data );
-        } else {
-            res.send( response );
-        }
-    })
-    .catch(function (error) {
-        if (error.response) {
-          // The request was made and the server responded with a status code
-          // that falls out of the range of 2xx
-          console.log('error response');
-          console.log(error.response.data);
-          console.log(error.response.status);
-          console.log(error.response.headers);
-        } else if (error.request) {
-          // The request was made but no response was received
-          // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-          // http.ClientRequest in node.js
-          console.log('error request');
-          console.log(error.request);
-        } else {
-          // Something happened in setting up the request that triggered an Error
-          console.log('error message');
-          console.log('Error', error.message);
-        }
-        console.log(error.config);
-        res.send( error );
-      });
+    console.log( code )
+
+    // axios({
+    //     method: 'post',
+    //     url: 'https://accounts.spotify.com/api/token',
+    //     data : {
+    //         code: code,
+    //         redirect_uri: frontEndUri,
+    //         grant_type: 'authorization_code'
+    //     },
+    //     headers: {
+    //         'content-type': 'application/x-www-form-urlencoded',
+    //         'Authorization': 'Basic ' + Buffer.from(CLIENT_ID + ':' + CLIENT_SECRET ).toString('base64')
+    //     }
+    // })
+    // .then( ( response ) => {
+    //     if ( response.status === 200 ) {
+    //         res.send(  response.data );
+    //     } else {
+    //         res.send( response );
+    //     }
+    // })
+    // .catch ( ( error ) => {
+    //     res.send( error );
+    // });
 }
 
 module.exports = {
