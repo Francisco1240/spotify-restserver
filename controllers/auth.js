@@ -26,7 +26,7 @@ const callback = ( req, res = response ) => {
         return;
     }
 
-    console.log( CLIENT_ID, CLIENT_SECRET, frontEndUri )
+    console.log( 'client data ',CLIENT_ID, CLIENT_SECRET, frontEndUri )
 
     axios({
         method: 'post',
@@ -42,11 +42,10 @@ const callback = ( req, res = response ) => {
         }
     })
     .then( ( response ) => {
+        console.log('Response --->',response)
         if ( response.status === 200 ) {
             res.send(  response.data );
         } else {
-            
-            console.log('Response --->',response)
             res.send( response );
         }
     })
