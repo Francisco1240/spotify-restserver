@@ -45,6 +45,8 @@ const callback = ( req, res = response ) => {
         if ( response.status === 200 ) {
             res.send(  response.data );
         } else {
+            
+            console.log('Response --->',response)
             res.send( response );
         }
     })
