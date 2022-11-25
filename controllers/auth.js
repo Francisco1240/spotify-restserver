@@ -6,7 +6,6 @@ const { getRandonString } = require('../helpers/randomString');
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const redirectUri = process.env.REDIRECT_URI;
-const frontEndUri = process.env.FRONTEND_URI;
 
 const stateKey = 'spotify_auth_state';
 
@@ -31,7 +30,7 @@ const callback = ( req, res = response ) => {
         url: 'https://accounts.spotify.com/api/token',
         data : {
             code: code,
-            redirect_uri: frontEndUri,
+            redirect_uri: redirectUri,
             grant_type: 'authorization_code'
         },
         headers: {
