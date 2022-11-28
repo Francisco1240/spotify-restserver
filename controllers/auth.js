@@ -5,13 +5,9 @@ require('dotenv').config();
 const { getRandonString } = require('../helpers/randomString');
 const { getCircularReplacer } = require('../helpers/getCircularReplace');
 
-// const CLIENT_ID = process.env.CLIENT_ID;
-// const CLIENT_SECRET = process.env.CLIENT_SECRET;
-// const redirectUri = process.env.REDIRECT_URI;
-
-const CLIENT_ID = '0a6ab43cb7c5426ab9182069574572a9';
-const CLIENT_SECRET = '255bced773424182975034a0c2f584f8';
-const redirectUri = 'http://localhost:4200/auth/callback';
+const CLIENT_ID = process.env.CLIENT_ID;
+const CLIENT_SECRET = process.env.CLIENT_SECRET;
+const redirectUri = process.env.REDIRECT_URI;
 
 const stateKey = 'spotify_auth_state';
 
