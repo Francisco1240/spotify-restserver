@@ -42,7 +42,6 @@ const callback = ( req, res = response ) => {
         'Accept-Encoding': 'identity',
         'Authorization': 'Basic ' + Buffer.from(CLIENT_ID + ':' + CLIENT_SECRET ).toString('base64'), 
         'Content-Type': 'application/x-www-form-urlencoded', 
-        'Cookie': 'sp_t=77727ea3400e3dccc978c1dd5f03971b; __Host-device_id=AQC3M5jjecJCY-ZchVsfNyi_cH-l5lzKDYR5TSZoMJMoAqMgBgCzy-bV5G1bw3PYQRFzfZqxoeyHviVceW9J4uekXADKuLQAlvg; sp_tr=false'
       },
       data : data,
       params: { trophies: true }
@@ -60,7 +59,7 @@ const callback = ( req, res = response ) => {
       res.send( JSON.stringify(error, getCircularReplacer()) );
     });
   } catch ( ex ) {
-    console.log( ex.message );
+    res.send( ex );
   }
 }
 
